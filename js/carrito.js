@@ -10,7 +10,8 @@ const dibujarCarrito = () => {
     containerVerCarrito.append(modalHeader)
 
     const botonModal = document.createElement("h1")
-    botonModal.innerHTML =  `<i data-feather="x-circle"></i>
+    botonModal.innerHTML =  `
+    <i data-feather="x-circle"></i>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
     ` 
     botonModal.className = "boton-header-modal"
@@ -26,7 +27,7 @@ const dibujarCarrito = () => {
         let carritoContent = document.createElement("div")
         carritoContent.className = "carrito-content"
         carritoContent.innerHTML = `
-                <img class="img-carrito-content" src="${producto.imagen}">
+                <img class="img-carrito-content" src="../assets/images/${producto.imagen}">
                 <p class="prod-carrito-content">${producto.nombre}</p>
                 <p>$${producto.precio}</p>
                 <p class="restar-prod"><i data-feather="minus-circle"></i>
@@ -70,6 +71,15 @@ const dibujarCarrito = () => {
             eliminarProducto(producto.id)
             saveLocal()
             dibujarCarrito()
+            Toastify({
+                text: `Producto eliminado`,
+                duration: 3000,
+                gravity: "top",
+                position:"center",
+                style: {
+                  background: "lightblue",
+                }
+              }).showToast();
         })
     })
     
@@ -113,15 +123,38 @@ const dibujarCarrito = () => {
   let vaciarCarrito = document.getElementById("vaciarCarrito")
   vaciarCarrito.addEventListener("click", () => {
    botonVaciarCarrito()
+   while(carrito.length > 0) {
+    carrito.pop()
+    saveLocal()
+    dibujarCarrito()
+    contadorCarrito()
+   }
+   Toastify({
+    text: `Su carrito está vacío`,
+    duration: 3000,
+    gravity: "top",
+    position:"center",
+    style: {
+        background: "red",
+    }
+    }).showToast();
+ 
+})
 
-
-  })
-
-
-   
+  
 }   
 
-
+if (carrito.length > 0) {
+    Swal.fire({
+        title: 'Tiene productos en su carrito',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+}
 
 verCarrito.addEventListener("click", dibujarCarrito)
 

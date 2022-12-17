@@ -4,7 +4,7 @@ header {
   justify-content: center;
   position: sticky;
   top: 0;
-  z-index: 9999;
+  z-index: 8;
   
 }
 
@@ -263,6 +263,7 @@ h4 {
 /* container ver carrito */
 .container-ver-carrito{
   width: 80%;
+  margin-top: 20px;
   margin: 0 10%;
   max-height: 88vh;
   color: white;
@@ -270,7 +271,7 @@ h4 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: fixed;
+  position:fixed;
   overflow: auto;
   z-index: 9;
   top: 12vh;
@@ -312,6 +313,7 @@ background-color:  #1F4761;
 } 
 
 .img-carrito-content{
+  border: outset #FFa300;
   height: 120px;
   width: 120px;
 }
@@ -367,6 +369,7 @@ background-color:  #1F4761;
 .btn-eliminar-producto {
   cursor: pointer;
 }
+
 
 @media screen and (max-width: 992px) {
   .sobre_nosotros {
